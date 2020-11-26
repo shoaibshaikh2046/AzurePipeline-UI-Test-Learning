@@ -18,7 +18,11 @@ namespace TechFabricSln.Test
         [Category("UITests")]
         public void VisitMicrosoft_CheckWindowsMenu()
         {
-            IWebDriver driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddExcludedArgument("enable-automation");
+            options.AddArguments("--no-sandbox", "--incognito", "--start-maximized", "--disable-gpu", "--disable-extensions", "--disable-dev-shm-usage");
+            options.AddArgument("--headless");
+            IWebDriver driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl("https://www.microsoft.com/");
             Thread.Sleep(10000);
             string Windows_text = driver.FindElement(By.Id("shellmenu_2")).Text;
